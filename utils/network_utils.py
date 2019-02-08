@@ -29,8 +29,7 @@ def init_weights(m):
 
 
 def save_checkpoints(cfg, file_path, epoch_idx, encoder, encoder_solver, \
-        decoder, decoder_solver, refiner, refiner_solver, merger, merger_solver, \
-        best_iou, best_epoch):
+        decoder, decoder_solver, merger, merger_solver, best_iou, best_epoch):
     print('[INFO] %s Saving checkpoint to %s ...' % (dt.now(), file_path))
     checkpoint = {
         'epoch_idx': epoch_idx,
@@ -42,9 +41,6 @@ def save_checkpoints(cfg, file_path, epoch_idx, encoder, encoder_solver, \
         'decoder_solver_state_dict': decoder_solver.state_dict()
     }
 
-    if cfg.NETWORK.USE_REFINER:
-        checkpoint['refiner_state_dict'] = refiner.state_dict()
-        checkpoint['refiner_solver_state_dict'] = refiner_solver.state_dict()
     if cfg.NETWORK.USE_MERGER:
         checkpoint['merger_state_dict'] = merger.state_dict()
         checkpoint['merger_solver_state_dict'] = merger_solver.state_dict()
