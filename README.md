@@ -1,19 +1,11 @@
-# Pix2Vox
+# 2D Views to 3D Objects
 
-This repository contains the source code for the paper [Pix2Vox: Context-aware 3D Reconstruction from Single and Multi-view Images](https://arxiv.org/abs/1901.11153).
+This repository contains the code for generation of 3D objects from 2D views.
+There are two parts in the ML pipeline:
+1. Semantic segmentation of the 2D images
+2. Generation of voxelized 3D objects from 2D images using the Pix2Vox architecture [Pix2Vox: Context-aware 3D Reconstruction from Single and Multi-view Images](https://arxiv.org/abs/1901.11153).
 
 ![Overview](https://infinitescript.com/wordpress/wp-content/uploads/2019/04/Pix2Vox-Overview.jpg)
-
-## Cite this work
-
-```
-@inproceedings{xie2019pix2vox,
-  title={Pix2Vox: Context-aware 3D Reconstruction from Single and Multi-view Images},
-  author={Xie, Haozhe and Yao, Hongxun and Sun, Xiaoshuai and Zhou, Shangchen and Zhang, Shengping},
-  booktitle={ICCV},
-  year={2019}
-}
-```
 
 ## Datasets
 
