@@ -24,6 +24,9 @@ from models.decoder import Decoder
 from models.refiner import Refiner
 from models.merger import Merger
 
+import collections
+from collections import OrderedDict
+
 def test_net(cfg, epoch_idx=-1, output_dir=None, test_data_loader=None, \
         test_writer=None, encoder=None, decoder=None, refiner=None, merger=None):
     # Enable the inbuilt cudnn auto-tuner to find the best algorithm to use
@@ -79,7 +82,21 @@ def test_net(cfg, epoch_idx=-1, output_dir=None, test_data_loader=None, \
         else:
             map_location = torch.device('cpu')
             checkpoint = torch.load(cfg.CONST.WEIGHTS, map_location=map_location)
+            
+            new_state_dict = OrderedDict()
 
+            for name, ele in checkpoint.items():
+                if isinstance(ele,collections.Mapping):
+                    temp_dict = OrderedDict()
+                    for k, v in ele.items():
+                        new_k = k.replace("module.","")
+                        temp_dict[new_k] = v
+                    new_state_dict[name] = temp_dict
+                else:
+                    new_state_dict[name] = ele
+                
+            checkpoint = new_state_dict
+             
 
         epoch_idx = checkpoint['epoch_idx']
         print('Epoch ID of the current model is {}'.format(epoch_idx))
